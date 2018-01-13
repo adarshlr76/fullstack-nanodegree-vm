@@ -7,14 +7,42 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></head>
 <body>
-	<div class="row">
+
+
+	<div class = 'flash'>
+			      {% with messages = get_flashed_messages() %}
+	      {% if messages %}
+	          
+	        <ul>
+	        {% for message in messages %}
+	            <li> <strong> {{ message }} </strong> </li>
+	        {% endfor %}
+	        </ul>
+	        {% endif %}
+	    {% endwith %}
+
+	</div>
+	{% if category_id %}
+
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-5"></div>
+		<div class="col-md-6 padding-none">
+			<a href="{{url_for('newItem',category_id = category_id)}}">
+				<button class="btn btn-default" id="new-item">
+					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Add Item
+				</button>
+			</a>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	{% endif %}
+
+
 
 	{% if items %}
-	  		{% include "categories.html" %}
+	  	{% include "categories.html" %}
 
-
-
-	  		{% include "items.html" %}
+  		{% include "items.html" %}
 
 	{% else %}
 	  		{% include "categories.html" %}
