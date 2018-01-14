@@ -2,12 +2,18 @@
 <head>
 	<title>Item Catalog </title>
 	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></head>
 <body>
 
+	<div class="row top-menu">
+		<div class="col-md-10"></div>
+		<div class="col-md-2 text-right">
+			<a href="{{url_for('showLogin')}}">Click Here to Log in </a>
+		</div>
+	</div>
 
 	<div class = 'flash'>
 			      {% with messages = get_flashed_messages() %}
@@ -22,6 +28,8 @@
 	    {% endwith %}
 
 	</div>
+
+	<!-- new item button -->
 	{% if category_id %}
 
 	<div class="row padding-top padding-bottom">
@@ -38,13 +46,15 @@
 	{% endif %}
 
 
+  		<div class="col-md-1"></div>
 
-	  	{% include "categories.html" %}
+	  	<div class="col-md-4">{% include "categories.html" %}</div>
+  		<div class="col-md-6 padding-none">{% include "items.html" %}</div>
+  		<div class="col-md-1"></div>
 
-  		{% include "items.html" %}
+  		
+</div>
 
-
-	</div>		
 
 </body>
 

@@ -1,13 +1,9 @@
 
-<div class="row">
-<section id = "categories">
 {% for c in categories %}
-		  	<div class="col-sm-1"></div>
 
 
-	  	<div class="col-sm-3"><p><a href="{{url_for('showItems',category = c.name)}}">{{c.name}}</a></p></div>
+	<p><a href="{{url_for('showItems',category = c.name)}}">{{c.name}}</a></p>
 	  	
 
 
-	{% endfor %}
-</section>
+{% endfor %}
