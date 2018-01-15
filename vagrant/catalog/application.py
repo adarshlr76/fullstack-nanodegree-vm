@@ -64,6 +64,8 @@ def showItemDesc(item_id) :
 
 @app.route('/catalog/<int:category_id>/item/new/',methods=['GET','POST'])
 def newItem(category_id):
+	if 'username' not in login_session:
+		return redirect('/login')
 	category = session.query(Category).filter_by(id = category_id).one()
 
 
@@ -79,17 +81,17 @@ def newItem(category_id):
 #edit item
 @app.route('/catalog/<int:category_id>/<string:item_name>/edit', methods=['GET','POST'])
 def editItem(category_id, item_name):
+	if 'username' not in login_session:
+		return redirect('/login')
 
-    editedItem = session.query(Item).filter_by(name = item_name).one()
-    category = session.query(Category).filter_by(id = category_id).one()
-    if request.method == 'POST':
-        if request.form['name']:
-            editedItem.name = request.form['name']
-        if request.form['description']:
+	editedItem = session.query(Item).filter_by(name = item_name).one()
+	category = session.query(Category).filter_by(id = category_id).one()
+
+	if request.method == 'POST':
+		if request.form['name']:
+			editedItem.name = request.form['name']
+		if request.form['description']:
             editedItem.description = request.form['description']
-        
-        #if request.form['category']:
-        #    editedItem.category_id = request.form['category_id']
         session.add(editedItem)
         session.commit() 
         flash('Item Successfully Edited')
@@ -100,6 +102,8 @@ def editItem(category_id, item_name):
 #Delete a item
 @app.route('/catalog/<int:category_id>/<string:item_name>/delete', methods = ['GET','POST'])
 def deleteItem(category_id,item_name):
+	if 'username' not in login_session:
+		return redirect('/login')
 	category = session.query(Category).filter_by(id = category_id).one()
 	itemToDelete = session.query(Item).filter_by(name = item_name).one()
 	if request.method == 'POST':
