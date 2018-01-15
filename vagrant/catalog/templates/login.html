@@ -8,8 +8,15 @@
 	<script src="//apis.google.com/js/platform.js?onload=start"> </script>
 </head>
 <body>
+   <div class="row banner menu">
+    <div class="col-md-11 col-md-offset-1 padding-none">
+      <h1>Login with OAuth 2.0 </h1>
+
+    </div>
+</div>
 	<!-- GOOGLE PLUS SIGN IN BUTTON-->
-          
+    <div class="row banner menu">
+      <div class="col-md-6 padding-none">          
         <div id="signinButton">
           <span class="g-signin"
             data-scope="openid email"
@@ -21,6 +28,8 @@
             data-approvalprompt="force">
           </span>
         </div>
+      </div>
+    </div>
 
 
 
@@ -118,8 +127,12 @@ function signInCallback(authResult) {
     });
   }
 </script>
-<fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
-</fb:login-button>
+    <div class="row banner menu">
+      <div class="col-md-6 padding-none">
+        <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+        </fb:login-button>
+      </div>
+    </div>
 
 <div id="status">
 </div>

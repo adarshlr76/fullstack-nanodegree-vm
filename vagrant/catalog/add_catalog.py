@@ -40,4 +40,4 @@ session.commit()
 
 
 
-print "added category and items of specified category!"
+print ("added category and items of specified category!")
