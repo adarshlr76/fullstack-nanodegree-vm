@@ -1,7 +1,6 @@
 
 {% for c in categories %}
 
-	<p><h2> Categories </h2></p>
 	<p><a href="{{url_for('showItems',category_name = c.name)}}">{{c.name}}</a></p>
 	  	
 

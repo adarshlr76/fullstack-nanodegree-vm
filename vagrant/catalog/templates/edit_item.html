@@ -6,11 +6,18 @@
 <body>
 	<form action="#" method = "post">
 				<div class="form-group">
-					<label for="name">Name:</label><br>
+					<h3><label for="name">Name:</label></h3><br>
 					<input type ="text" maxlength="100" class="form-control" name="name" value="{{item.name }}"><br>
 
-					<label for="description">Description:</label><br>
+					<h3><label for="description">Description:</label></h3><br>
 					<textarea class="form-control" maxlength="250" rows="3" name="description">{{item.description}}</textarea>
+					<br>
+					<h3> category : </h3> 
+					<select name="category" >
+            			{% for c in categories %}
+                		<option value="{{c.name}}" {% if c == item.category %} selected {% endif %}>{{c.name}}</option>
+            			{% endfor %}
+					</select>
 					<br><br>
 
 					

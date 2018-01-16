@@ -40,12 +40,11 @@
 	</div>
 
 	<!-- new item button -->
-	{% if category_id %}
 
 	<div class="row padding-top padding-bottom">
 		<div class="col-md-5"></div>
 		<div class="col-md-6 padding-none">
-			<a href="{{url_for('newItem',category_id = category_id)}}">
+			<a href="{{url_for('newItem')}}">
 				<button class="btn btn-default" id="new-item">
 					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Add Item
 				</button>
@@ -53,14 +52,19 @@
 		</div>
 		<div class="col-md-1"></div>
 	</div>
-	{% endif %}
+
+		<div class="col-md-1"></div>
+		<h3><div class="col-md-4"> Categories </div></h3>
+		<h3><div class="col-md-6 padding-none">Latest Items</div></h3>
+		<h3><div class="col-md-1"></div></h3>
 
 
   		<div class="col-md-1"></div>
+		
 
-	  	<div class="col-md-4">{% include "categories.html" %}</div>
-  		<div class="col-md-6 padding-none">{% include "latest_items.html" %}</div>
-  		<div class="col-md-1"></div>
+	  	<h3><div class="col-md-4">{% include "categories.html" %}</div></h3>
+  		<h3><div class="col-md-6 padding-none">{% include "latest_items.html" %}</div></h3>
+  		<h3><div class="col-md-1"></div></h3>
 
   		
 </div>

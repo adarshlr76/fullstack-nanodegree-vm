@@ -6,10 +6,17 @@
 <body>
 	<h1> Add New Item </h1> 
 	<form action="#" method = "post">
-		Title : <br>
+		<h3>Title : </h3> 
 		<input type="text" name="name"><br>
-		Description : <br>
-		<input type="text" name="description"><br><br>
+		<h3> Description : </h3> 
+		<input type="text" name="description"><br>
+		<h3> category : </h3> 
+		<select name="category">
+            {% for c in categories %}
+                <option value="{{c.name}}">{{c.name}}</option>
+            {% endfor %}
+		</select>
+		<br><br>
 			
 		<input type="submit" value="create"><br>
 
