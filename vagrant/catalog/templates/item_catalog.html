@@ -11,16 +11,18 @@
 </head>
 <body>
 
-	
+
 	<div class="row banner menu">
     <div class="col-md-9 col-md-offset-1 padding-none">
-    	<br><br>
+    	<br> <br>
       <h1>Catalog App </h1>
       <br>
-
     </div>
     <div class="col-md-2 text-centre">
-    	<a href="{{url_for('showDisconnect')}}" class="btn btn-primary" role="button">Disconnect</a>
+			
+			    	<a href="{{url_for('showDisconnect')}}" class="btn btn-primary" role="button">Disconnect</a>
+
+			  
 
 	</div>
 </div>
@@ -54,12 +56,13 @@
 		<div class="col-md-1"></div>
 	</div>
 	{% endif %}
+	<!-- end new item button -->
 
 
   		<div class="col-md-1"></div>
 
 	  	<div class="col-md-4">{% include "categories.html" %}</div>
-  		<div class="col-md-6 padding-none">{% include "latest_items.html" %}</div>
+  		<div class="col-md-6 padding-none">{% include "items.html" %}</div>
   		<div class="col-md-1"></div>
 
   		
@@ -68,4 +71,3 @@
 
 </body>
 
-</html>

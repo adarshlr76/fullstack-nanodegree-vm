@@ -14,13 +14,14 @@
 	
 	<div class="row banner menu">
     <div class="col-md-9 col-md-offset-1 padding-none">
-    	<br><br>
+    	<br> <br>
       <h1>Catalog App </h1>
       <br>
-
     </div>
     <div class="col-md-2 text-centre">
-    	<a href="{{url_for('showDisconnect')}}" class="btn btn-primary" role="button">Disconnect</a>
+			    	<a href="{{url_for('showLogin')}}" class="btn btn-primary" role="button">Login</a>
+
+			  
 
 	</div>
 </div>
@@ -39,27 +40,11 @@
 
 	</div>
 
-	<!-- new item button -->
-	{% if category_id %}
-
-	<div class="row padding-top padding-bottom">
-		<div class="col-md-5"></div>
-		<div class="col-md-6 padding-none">
-			<a href="{{url_for('newItem',category_id = category_id)}}">
-				<button class="btn btn-default" id="new-item">
-					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Add Item
-				</button>
-			</a>
-		</div>
-		<div class="col-md-1"></div>
-	</div>
-	{% endif %}
-
 
   		<div class="col-md-1"></div>
 
 	  	<div class="col-md-4">{% include "categories.html" %}</div>
-  		<div class="col-md-6 padding-none">{% include "latest_items.html" %}</div>
+  		<div class="col-md-6 padding-none">{% include "items.html" %}</div>
   		<div class="col-md-1"></div>
 
   		
@@ -68,4 +53,3 @@
 
 </body>
 
-</html>

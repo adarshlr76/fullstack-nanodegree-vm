@@ -6,6 +6,8 @@
   	</script>
 
 	<script src="//apis.google.com/js/platform.js?onload=start"> </script>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+
 </head>
 <body>
    <div class="row banner menu">
@@ -14,28 +16,7 @@
 
     </div>
 </div>
-	<!-- GOOGLE PLUS SIGN IN BUTTON-->
-    <div class="row banner menu">
-      <div class="col-md-6 padding-none">          
-        <div id="signinButton">
-          <span class="g-signin"
-            data-scope="openid email"
-            data-clientid="996382011955-nc9rhr74lvcgn9ab8n3au5428covhbbj.apps.googleusercontent.com"
-            data-redirecturi="postmessage"
-            data-accesstype="offline"
-            data-cookiepolicy="single_host_origin"
-            data-callback="signInCallback"
-            data-approvalprompt="force">
-          </span>
-        </div>
-      </div>
-    </div>
-
-
-
-
-	<!--END GOOGLE PLUS SIGN IN BUTTON -->
-	<div id="result"></div>
+		<div id="result"></div>
 
 <script>
 function checkLoginState() {
@@ -77,7 +58,7 @@ function signInCallback(authResult) {
 
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '166211604106774',
+      appId      : '169403230339317',
       cookie     : true,  // enable cookies to allow the server to access 
                           // the session
       xfbml      : true,  // parse social plugins on this page
@@ -115,7 +96,7 @@ function signInCallback(authResult) {
         if (result) {
           $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
          setTimeout(function() {
-          window.location.href = "/restaurant";
+          window.location.href = "/catalog";
          }, 4000);
           
       } else {
@@ -127,12 +108,33 @@ function signInCallback(authResult) {
     });
   }
 </script>
-    <div class="row banner menu">
-      <div class="col-md-6 padding-none">
+  <!-- GOOGLE PLUS SIGN IN BUTTON-->
+      <div class="col-md-6 ">          
+        <div id="signinButton">
+          <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="996382011955-nc9rhr74lvcgn9ab8n3au5428covhbbj.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+          </span>
+        </div>
+      </div>
+
+
+
+
+
+  <!--END GOOGLE PLUS SIGN IN BUTTON -->
+<!-- facebook login button-->  
+      <div class="col-md-6">
         <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
         </fb:login-button>
       </div>
-    </div>
+<!-- end of facebook login -->
+
 
 <div id="status">
 </div>
