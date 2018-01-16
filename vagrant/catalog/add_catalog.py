@@ -29,8 +29,39 @@ session.commit()
 
 # Menu for Soccer
 category1 = Category(user_id=1, name="Soccer")
-
 session.add(category1)
+session.commit()
+
+category2 = Category(user_id=1, name="Basketball")
+session.add(category2)
+session.commit()
+
+category3 = Category(user_id=1, name="Baseball")
+session.add(category3)
+session.commit()
+
+category4 = Category(user_id=1, name="Frisbee")
+session.add(category4)
+session.commit()
+
+category5 = Category(user_id=1, name="Snowboarding")
+session.add(category5)
+session.commit()
+
+category6 = Category(user_id=1, name="Rock Climbing")
+session.add(category6)
+session.commit()
+
+category7 = Category(user_id=1, name="Foosball")
+session.add(category7)
+session.commit()
+
+category8 = Category(user_id=1, name="Skating")
+session.add(category8)
+session.commit()
+
+category9 = Category(user_id=1, name="Hockey")
+session.add(category9)
 session.commit()
 
 item1 = Item(user_id=1, name="Soccer Ball", description=" the ball used in the sport of association football", date=datetime.datetime.now(),category=category1)
@@ -39,5 +70,15 @@ session.add(item1)
 session.commit()
 
 
+item2 = Item(user_id=1, name="Goggles", description="for fine vision and long term well being", date=datetime.datetime.now(),category=category5)
+
+session.add(item2)
+session.commit()
+
+
+item3 = Item(user_id=1, name="Snowboard", description=" for player to skie across the mountainous snow", date=datetime.datetime.now(),category=category5)
+
+session.add(item3)
+session.commit()
 
 print ("added category and items of specified category!")

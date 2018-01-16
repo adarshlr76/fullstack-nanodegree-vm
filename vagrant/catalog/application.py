@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify,url_for,flash
-from sqlalchemy import create_engine,asc
+from sqlalchemy import create_engine,asc,desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Category, Item, User
 from flask import session as login_session
@@ -35,8 +35,8 @@ session = DBSession()
 
 
 def showCatalogs():
-	categories = session.query(Category).order_by(asc(Category.name))
-	items = session.query(Item).order_by(Item.date)
+	categories = session.query(Category).order_by(desc(Category.name))
+	items = session.query(Item).order_by(desc(Item.date))
 	if 'username' not in login_session:
 		return render_template('public_catalog.html',categories=categories,items=items)
 	else:
@@ -58,7 +58,7 @@ def showItems(category_name) :
 	#return "show tems go here"
 	c = session.query(Category).filter_by(name = category_name).one()
 	items = session.query(Item).filter_by(category_id = c.id).all()
-	categories = session.query(Category).order_by(asc(Category.name))
+	categories = session.query(Category).order_by(desc(Category.name))
     	if 'username' not in login_session:
         	return render_template('public_item_catalog.html',categories=categories,items=items,category_id=c.id,category_name = category_name)
     	else:
@@ -74,23 +74,45 @@ def showItemDesc(item_id) :
     	else:
         	return render_template('item_desc.html',item=item)
 	
+@app.route('/item/new',methods=['GET','POST'])
 
-@app.route('/catalog/<int:category_id>/item/new/',methods=['GET','POST'])
-def newItem(category_id):
+
+def newItem():
+    if 'username' not in login_session:
+        return redirect('/login')
+    categories = session.query(Category).order_by(asc(Category.name))
+
+    if request.method == 'POST' :
+        category = session.query(Category).filter_by(name = request.form['category']).one()
+        newItem = Item(name = request.form['name'], description = request.form['description'], category_id = category.id, user_id = 1,date=datetime.datetime.now())
+        session.add(newItem)
+        session.commit()
+        flash("New Item Successfully Created")
+        return redirect(url_for('showCatalogs'))
+    else :
+        return render_template('new_item.html',categories = categories)
+
+
+    return "new item function goes  here"
+"""
+@app.route('/catalog/<string:itemname>/new', methods=['GET','POST'])
+def newItem(catalog_name):
+#@app.route('/catalog/newItem',methods=['GET','POST'])
+#def newItem():
 	if 'username' not in login_session:
 		return redirect('/login')
-	category = session.query(Category).filter_by(id = category_id).one()
+	category = session.query(Category).filter_by(name = request.form['category']).one()
 
 
 	if request.method == 'POST' :
-		newItem = Item(name = request.form['name'], description = request.form['description'], category_id = category_id, user_id = 1,date=datetime.datetime.now())
+		newItem = Item(name = request.form['name'], description = request.form['description'], category_id = category.id, user_id = 1,date=datetime.datetime.now())
 		session.add(newItem)
 		session.commit()
 		flash("New Item Successfully Created")
-		return redirect(url_for('showItems', category = category.name))
+		return redirect(url_for('showCatalogs'))
 	else :
-		return render_template('new_item.html', category_id = category_id)
-
+		return render_template('new_item.html')
+"""
 #edit item
 @app.route('/catalog/<int:category_id>/<string:item_name>/edit', methods=['GET','POST'])
 def editItem(category_id, item_name):
@@ -100,20 +122,24 @@ def editItem(category_id, item_name):
 	editedItem = session.query(Item).filter_by(name = item_name).one()
 	category = session.query(Category).filter_by(id = category_id).one()
 
-    
+    	categories = session.query(Category).order_by(desc(Category.name))
+
 
 	if request.method == 'POST':
 		if request.form['name']:
 			editedItem.name = request.form['name']
 		if request.form['description']: 
 			editItem.description = request.form['description']
+		if request.form['category']:
+			category = session.query(Category).filter_by(name=request.form['category']).one()
+			editedItem.category = category
 
-	        session.add(editedItem)
+		session.add(editedItem)
         	session.commit()
 	        flash('Item Successfully edited')
-        	return redirect(url_for('showItems', category = category.name))
+        	return redirect(url_for('showItems', category_name = category.name))
 	else :
-        	return render_template('edit_item.html', item=editedItem,category=category)
+        	return render_template('edit_item.html', item=editedItem,category=category,categories=categories)
 
 #Delete a item
 @app.route('/catalog/<int:category_id>/<string:item_name>/delete', methods = ['GET','POST'])
