@@ -44,6 +44,17 @@ def showCatalogs():
 
  
 
+@app.route('/catalog/JSON')
+def catalogsJSON():
+    categories = session.query(Category).all()
+    category_dict = [c.serialize for c in categories]
+    for index in range(len(category_dict)):
+        items = session.query(Item).filter_by(category_id=category_dict[index]["id"])
+        items_dict = [i.serialize for i in items]
+        if items:
+            category_dict[index]["Item"] = items_dict
+    return jsonify(Category=category_dict)
+
 # Create anti-forgery state token
 @app.route('/login')
 def showLogin():
@@ -79,7 +90,7 @@ def showItemDesc(item_id) :
 
 def newItem():
     if 'username' not in login_session:
-        return redirect('/login')
+        return redirect(url_for('showLogin'))
     categories = session.query(Category).order_by(asc(Category.name))
 
     if request.method == 'POST' :
@@ -94,30 +105,12 @@ def newItem():
 
 
     return "new item function goes  here"
-"""
-@app.route('/catalog/<string:itemname>/new', methods=['GET','POST'])
-def newItem(catalog_name):
-#@app.route('/catalog/newItem',methods=['GET','POST'])
-#def newItem():
-	if 'username' not in login_session:
-		return redirect('/login')
-	category = session.query(Category).filter_by(name = request.form['category']).one()
 
-
-	if request.method == 'POST' :
-		newItem = Item(name = request.form['name'], description = request.form['description'], category_id = category.id, user_id = 1,date=datetime.datetime.now())
-		session.add(newItem)
-		session.commit()
-		flash("New Item Successfully Created")
-		return redirect(url_for('showCatalogs'))
-	else :
-		return render_template('new_item.html')
-"""
 #edit item
 @app.route('/catalog/<int:category_id>/<string:item_name>/edit', methods=['GET','POST'])
 def editItem(category_id, item_name):
 	if 'username' not in login_session:
-		return redirect('/login')
+		return redirect(url_for('showLogin'))
 
 	editedItem = session.query(Item).filter_by(name = item_name).one()
 	category = session.query(Category).filter_by(id = category_id).one()
@@ -145,7 +138,7 @@ def editItem(category_id, item_name):
 @app.route('/catalog/<int:category_id>/<string:item_name>/delete', methods = ['GET','POST'])
 def deleteItem(category_id,item_name):
 	if 'username' not in login_session:
-		return redirect('/login')
+		return redirect(url_for('showLogin'))
 	category = session.query(Category).filter_by(id = category_id).one()
 	itemToDelete = session.query(Item).filter_by(name = item_name).one()
 	if request.method == 'POST':
