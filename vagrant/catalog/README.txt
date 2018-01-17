@@ -17,4 +17,12 @@ Requirements:
 7. access and test application using http://localhost:8000
 
 Usage
+The home page has the various categories in the database
+it shows the latest items added along with the category for which they are added
+on selecting the specific category in the home page all the items in the category along with the number of items in the category is displayed
+selecting the specific item shows more detailed description
+the user can login into the system using the facebook or google login
+users who have logged in can add new items by using the additems button in the home page
+there is also a provition to edit or delete the item in item description page
+JSON endpoint is provided which displays all the items in the specified category
 

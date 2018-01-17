@@ -246,6 +246,7 @@ def fbdisconnect():
     del login_session['username']
     del login_session['email']
     del login_session['picture']
+    del login_session['provider']
     flash("Successfully disconnected")
     return redirect(url_for('showCatalogs'))
 
@@ -398,6 +399,7 @@ def gdisconnect():
         del login_session['username']
         del login_session['email']
         del login_session['picture']
+        del login_session['provider']
         flash("Successfully disconnected")
         #response = make_response(json.dumps('Successfully disconnected.'), 200)
         #response.headers['Content-Type'] = 'application/json'

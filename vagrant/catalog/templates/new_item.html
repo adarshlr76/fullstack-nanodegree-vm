@@ -1,5 +1,7 @@
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 
 </head>
@@ -21,8 +23,9 @@
 		</select>
 		<br><br>
 			
-		<button type="submit" value="create">create</button>
-		<button type="Cancel" value="Cancel">Cancel</button><br>
+		<button type="submit" class="btn btn-primary" value="create">create</button>
+		<a href="{{url_for('showCatalogs')}}" class="btn btn-primary" role="button">cancel</a>
+
 
 
 	</form>
