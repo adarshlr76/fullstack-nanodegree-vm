@@ -98,13 +98,12 @@ def newItem():
         newItem = Item(name = request.form['name'], description = request.form['description'], category_id = category.id, user_id = 1,date=datetime.datetime.now())
         session.add(newItem)
         session.commit()
-        flash("New Item Successfully Created")
+        #flash("New Item Successfully Created")
         return redirect(url_for('showCatalogs'))
     else :
         return render_template('new_item.html',categories = categories)
 
 
-    return "new item function goes  here"
 
 #edit item
 @app.route('/catalog/<int:category_id>/<string:item_name>/edit', methods=['GET','POST'])
@@ -129,8 +128,9 @@ def editItem(category_id, item_name):
 
 		session.add(editedItem)
         	session.commit()
-	        flash('Item Successfully edited')
-        	return redirect(url_for('showItems', category_name = category.name))
+	        #flash('Item Successfully edited')
+        	#return redirect(url_for('showItems', category_name = category.name))
+            	return redirect(url_for('showCatalogs'))
 	else :
         	return render_template('edit_item.html', item=editedItem,category=category,categories=categories)
 
