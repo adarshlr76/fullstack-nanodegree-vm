@@ -33,7 +33,7 @@ session = DBSession()
 @app.route('/')
 @app.route('/catalog')
 
-
+#shows all the items in the catalog
 def showCatalogs():
 	categories = session.query(Category).order_by(desc(Category.name))
 	items = session.query(Item).order_by(desc(Item.date))
@@ -43,7 +43,7 @@ def showCatalogs():
 		return render_template('catalog.html',categories=categories,items=items)
 
  
-
+#JSON endpoint 
 @app.route('/catalog/JSON')
 def catalogsJSON():
     categories = session.query(Category).all()
@@ -151,7 +151,7 @@ def deleteItem(category_id,item_name):
 
 
 
-
+#connect using the facebook account
 @app.route('/fbconnect', methods=['POST'])
 def fbconnect():
     if request.args.get('state') != login_session['state']:
@@ -224,6 +224,7 @@ def fbconnect():
     flash("Now logged in as %s" % login_session['username'])
     return output
 
+#disconnect function for either facebook or google
 @app.route('/disconnect')
 def showDisconnect():
     if login_session['provider'] == 'google' :
@@ -235,6 +236,7 @@ def showDisconnect():
 
     #return redirect(url_for(showCatalogs))
 
+#disconnect from facebook account
 @app.route('/fbdisconnect')
 def fbdisconnect():
     facebook_id = login_session['facebook_id']
@@ -251,7 +253,7 @@ def fbdisconnect():
     return redirect(url_for('showCatalogs'))
 
 
-
+#connect to google+ account
 @app.route('/gconnect', methods=['POST'])
 
 def gconnect():
